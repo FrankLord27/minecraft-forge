@@ -1,0 +1,29 @@
+version: "3.5"
+
+# Docker Volumes
+volumes:
+    forgemc_data:
+        name: forgemc_data
+
+# Docker services
+services:
+    # Forge MC
+    papermc:
+        image: itzg/minecraft-server
+        environment:
+            EULA: "true"
+            TYPE: FORGE
+            VERSION: 1.17.1
+            
+            CONSOLE: "false"
+            ONLINE_MODE: "false"
+
+        container_name: forgemc
+        restart: always
+        tty: true
+        stdin_open: true
+        volumes:
+            - forgemc_data:/data
+            
+        ports:
+            - "25565:25565"
